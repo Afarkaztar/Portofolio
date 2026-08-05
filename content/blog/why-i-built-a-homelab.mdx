@@ -1,0 +1,20 @@
+---
+title: "Why I Built a Homelab (and What Broke First)"
+category: "Linux"
+date: "2026-02-05"
+excerpt: "Notes from setting up a Proxmox-based homelab to practice server administration, and the mistakes that taught me the most."
+---
+
+Reading about Linux administration only goes so far. I wanted an environment where breaking something didn't mean breaking production, so I put together a small homelab on repurposed hardware.
+
+## The Setup
+
+I started with Proxmox as a hypervisor, split the network into VLANs for management and services, and put an Nginx reverse proxy in front of everything self-hosted.
+
+## What Broke First
+
+The first real lesson came from a botched firewall rule that locked me out of SSH entirely — a good reminder to always test firewall changes from a console session, not just over the network you're about to cut off.
+
+## What I'd Tell Past Me
+
+Document configuration changes as you make them, even if it feels unnecessary at the time. Six months later, "why is this rule here" is a much harder question to answer without notes.

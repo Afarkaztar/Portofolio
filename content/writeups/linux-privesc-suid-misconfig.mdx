@@ -1,0 +1,28 @@
+---
+title: "Linux Privilege Escalation via a Misconfigured SUID Binary"
+category: "Linux"
+date: "2026-01-22"
+excerpt: "Escalating from a low-privilege shell to root by abusing a custom SUID binary that shelled out without a fixed PATH."
+---
+
+## Initial Foothold
+
+After gaining a low-privilege shell through an exposed service, the next step was enumerating the box for privilege escalation paths — checking `sudo -l`, cron jobs, and SUID binaries with `find / -perm -4000 -type f 2>/dev/null`.
+
+## The Misconfiguration
+
+One binary stood out: a custom SUID executable owned by root that called an internal tool by name only, without specifying an absolute path. Because it inherited the invoking user's `PATH`, this created a classic PATH-hijacking opportunity.
+
+## Exploitation
+
+By placing a malicious script named identically to the internal tool earlier in `PATH` and making it executable, running the SUID binary executed the malicious script with root privileges instead of the intended tool — dropping a root shell.
+
+## Remediation
+
+- Always invoke commands from SUID binaries using absolute paths.
+- Avoid SUID entirely where a narrower capability (Linux capabilities) would suffice.
+- Audit SUID binaries regularly with `find` and remove unnecessary ones.
+
+## Takeaway
+
+SUID misconfigurations remain one of the most common and reliable privilege escalation paths on Linux systems, and are worth checking first on any new box.

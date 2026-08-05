@@ -1,0 +1,13 @@
+{
+  "name": "Afarik Rakas Berdi — Portfolio",
+  "short_name": "Afarik",
+  "description": "Computer Engineering student portfolio focused on cybersecurity, cloud infrastructure, and DevSecOps.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B0F19",
+  "theme_color": "#0B0F19",
+  "icons": [
+    { "src": "/favicon.png", "sizes": "64x64", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

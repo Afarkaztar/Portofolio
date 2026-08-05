@@ -1,0 +1,28 @@
+---
+title: "Finding a Hidden Admin Panel via IDOR"
+category: "Web Security"
+date: "2026-03-14"
+excerpt: "How a predictable resource identifier exposed an unauthenticated admin panel during a CTF web challenge."
+---
+
+## Recon
+
+The challenge exposed a single login page with no obvious way in. Directory brute-forcing with a standard wordlist surfaced a handful of static assets referencing an internal `/panel/{id}` route, which hinted at a resource-based access pattern rather than a role-based one.
+
+## The Vulnerability
+
+Requesting `/panel/1` returned a generic "not found" page, but incrementing the identifier eventually returned a valid admin dashboard without any authentication check. This is a classic Insecure Direct Object Reference (IDOR): the server trusted the client-supplied ID without verifying the requester's session or role.
+
+## Exploitation
+
+A short script iterating over a bounded ID range located the admin panel within seconds. From there, the flag was visible directly in the dashboard's audit log view — no further exploitation was needed.
+
+## Remediation
+
+- Enforce authorization checks server-side for every object reference, not just at the login boundary.
+- Use non-sequential, unguessable identifiers (UUIDs) for sensitive resources.
+- Add rate limiting and anomaly detection on sequential ID access patterns.
+
+## Takeaway
+
+IDOR bugs are easy to miss because the application "works correctly" for the happy path. Testing boundary and adjacent IDs should be a default step in any web assessment.
