@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 
 const channels = [
   { icon: Mail, label: "Email", value: social.email, href: `mailto:${social.email}` },
-  { icon: Github, label: "GitHub", value: "afarikrb", href: social.github },
-  { icon: Linkedin, label: "LinkedIn", value: "afarikrb", href: social.linkedin },
-  { icon: Instagram, label: "Instagram", value: "afarik.rb", href: social.instagram },
+  { icon: Github, label: "GitHub", value: "Afarkaztar", href: social.github },
+  { icon: Linkedin, label: "LinkedIn", value: "Afarik Rakas Berdi", href: social.linkedin },
+  { icon: Instagram, label: "Instagram", value: "Afrknz_", href: social.instagram },
 ];
 
 export default function ContactPage() {
